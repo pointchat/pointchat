@@ -7,14 +7,14 @@
     <title>PointTalk — Auto Match</title>
 
     <style>
-        :root {
+         :root {
             --accent: #104bff;
             --primary: #000;
             --danger: #ff4444;
             --muted: #6b7280;
             font-family: Arial, Helvetica, sans-serif;
         }
-
+        
         html,
         body {
             width: 100vw;
@@ -26,8 +26,8 @@
             display: flex;
             flex-direction: column;
         }
-
         /* LOGIN */
+        
         #login-screen {
             position: fixed;
             inset: 0;
@@ -38,7 +38,7 @@
             z-index: 9999;
             padding: 20px;
         }
-
+        
         #login-box {
             width: 100%;
             max-width: 360px;
@@ -48,7 +48,7 @@
             box-shadow: 0 6px 20px rgba(2, 6, 23, 0.08);
             text-align: center;
         }
-
+        
         #login-box input {
             width: 100%;
             padding: 12px;
@@ -57,7 +57,7 @@
             margin-top: 10px;
             font-size: 16px;
         }
-
+        
         #login-box button {
             width: 100%;
             padding: 12px;
@@ -69,15 +69,15 @@
             margin-top: 12px;
             cursor: pointer;
         }
-
+        
         #error-message {
             color: var(--danger);
             font-size: 14px;
             margin-bottom: 12px;
             display: none;
         }
-
         /* HEADER */
+        
         header.desktop-header,
         header.mobile-header {
             position: fixed;
@@ -89,7 +89,7 @@
             font-weight: 700;
             z-index: 100;
         }
-
+        
         header.desktop-header {
             top: 0;
             height: 64px;
@@ -99,7 +99,7 @@
             font-size: 20px;
             display: none;
         }
-
+        
         header.mobile-header {
             top: 0;
             height: 64px;
@@ -108,8 +108,8 @@
             font-size: 22px;
             display: none;
         }
-
         /* CHAT */
+        
         #chat-container {
             display: none;
             height: 100%;
@@ -118,25 +118,25 @@
             display: flex;
             flex-direction: column;
         }
-
+        
         #badCounterWrapper {
             color: white;
             text-align: center;
             font-size: 13px;
             padding-top: 4px;
         }
-
+        
         #badCounter {
             display: none;
         }
-
+        
         #muteTimer {
             font-size: 12px;
             margin-top: 2px;
             color: #ffe9e9;
         }
-
         /* nome da sala em cima da caixa */
+        
         .chat-top-bar {
             display: flex;
             align-items: center;
@@ -145,11 +145,11 @@
             font-size: 14px;
             font-weight: bold;
         }
-
+        
         .room-name {
             font-weight: bold;
         }
-
+        
         .chat-box {
             background: white;
             border-radius: 10px;
@@ -160,7 +160,7 @@
             flex-direction: column;
             margin: 4px 12px 4px 12px;
         }
-
+        
         .msg-me {
             background: rgb(8, 8, 240);
             color: white;
@@ -170,7 +170,7 @@
             max-width: 78%;
             align-self: flex-end;
         }
-
+        
         .msg-them {
             background: #eef2f7;
             color: #2f00ff;
@@ -180,12 +180,12 @@
             max-width: 78%;
             align-self: flex-start;
         }
-
+        
         .msg-blocked {
             opacity: 0.6;
             text-decoration: line-through;
         }
-
+        
         .system {
             background: #ffe0e0;
             padding: 8px;
@@ -193,8 +193,8 @@
             margin: 6px 0;
             font-style: italic;
         }
-
         /* linha "digitando..." */
+        
         #typingIndicator {
             font-size: 12px;
             color: #fefefe;
@@ -202,7 +202,7 @@
             min-height: 16px;
             font-style: italic;
         }
-
+        
         .input-fixed {
             display: flex;
             gap: 8px;
@@ -210,45 +210,45 @@
             padding: 12px;
             border-top: 1px solid #ddd;
         }
-
+        
         .input-fixed input {
             flex: 1;
             padding: 12px;
             border: 1px solid #272727;
             border-radius: 10px;
         }
-
+        
         .input-fixed button {
             padding: 12px;
             border-radius: 10px;
             border: 0;
             cursor: pointer;
         }
-
+        
         #chatSend {
             background: #1861ff;
             color: white;
         }
-
+        
         #emojiBtn {
             background: #ffcc00;
         }
-
+        
         #clearChatBtn {
-    background: #1861ff;
-    border: none;
-    border-radius: 10px;
-    min-width: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#clearChatBtn svg {
-    fill: #ffffff;
-}
-
+            background: #3a0dff;
+            border: none;
+            border-radius: 10px;
+            min-width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #clearChatBtn svg {
+            fill: #ffffff;
+        }
         /* EMOJIS */
+        
         #emojiPicker {
             display: none;
             background: white;
@@ -263,14 +263,14 @@
             flex-wrap: wrap;
             z-index: 1000;
         }
-
+        
         #emojiPicker .emoji {
             cursor: pointer;
             font-size: 20px;
             padding: 4px;
         }
-
         /* ALERT PANEL */
+        
         #alertPanel {
             display: none;
             position: fixed;
@@ -280,20 +280,20 @@
             justify-content: center;
             align-items: center;
         }
-
-        #alertPanel > div {
+        
+        #alertPanel>div {
             background: white;
             padding: 20px;
             border-radius: 12px;
             max-width: 300px;
             text-align: center;
         }
-
+        
         #alertPanel p {
             font-size: 16px;
             margin-bottom: 20px;
         }
-
+        
         #alertPanel button {
             padding: 10px 20px;
             border: none;
@@ -487,17 +487,25 @@
                     out = data.candidates[0].content.parts[0].text.trim();
                 }
 
-                if (!out) return { status: "allow" };
+                if (!out) return {
+                    status: "allow"
+                };
 
                 if (out.toUpperCase().includes("BLOCK")) {
-                    return { status: "block" };
+                    return {
+                        status: "block"
+                    };
                 }
 
-                return { status: "allow" };
+                return {
+                    status: "allow"
+                };
 
             } catch (e) {
                 console.error("AI error:", e);
-                return { status: "allow" };
+                return {
+                    status: "allow"
+                };
             }
         }
 
@@ -511,7 +519,7 @@
             const totalSec = Math.floor(diffMs / 1000);
             const min = String(Math.floor(totalSec / 60)).padStart(2, "0");
             const sec = String(totalSec % 60).padStart(2, "0");
-            return ${min}:${sec};
+            return `${min}:${sec}`;
         }
 
         function startMuteCountdown() {
@@ -520,7 +528,7 @@
                 muteInterval = null;
             }
 
-            muteTimerLabel.textContent = Silenciado devido uso linguagem imprópria: ${formatRemaining()};
+            muteTimerLabel.textContent = `Silenciado devido uso linguagem imprópria: ${formatRemaining()}`;
 
             muteInterval = setInterval(() => {
                 if (!isMuted()) {
@@ -550,7 +558,7 @@
         function setTypingState(isTyping) {
             if (!userId) return;
             isCurrentlyTyping = isTyping;
-            db.ref(${TYPING_PATH}/${userId}).set({
+            db.ref(`${TYPING_PATH}/${userId}`).set({
                 username,
                 typing: isTyping,
                 ts: Date.now()
@@ -574,11 +582,11 @@
             if (typingUsers.length === 0) {
                 typingIndicator.textContent = "";
             } else if (typingUsers.length === 1) {
-                typingIndicator.textContent = ${typingUsers[0]} está digitando...;
+                typingIndicator.textContent = `${typingUsers[0]} está digitando...`;
             } else if (typingUsers.length === 2) {
-                typingIndicator.textContent = ${typingUsers[0]} e ${typingUsers[1]} estão digitando...;
+                typingIndicator.textContent = `${typingUsers[0]} e ${typingUsers[1]} estão digitando...`;
             } else {
-                typingIndicator.textContent = ${typingUsers[0]}, ${typingUsers[1]} outros estão digitando...;
+                typingIndicator.textContent = `${typingUsers[0]}, ${typingUsers[1]} outros estão digitando...`;
             }
         }
 
@@ -596,7 +604,7 @@
                 if (!msg) return;
 
                 if (msg.user !== username) {
-                    addMsg("msg-them", <b>${msg.user}:</b> ${msg.text});
+                    addMsg("msg-them", `<b>${msg.user}:</b> ${msg.text}`);
                 }
             });
         }
@@ -636,16 +644,16 @@
         };
 
         // ENVIAR MENSAGEM
-        chatSend.onclick = async () => {
+        chatSend.onclick = async() => {
             if (isMuted()) {
-                addSystemMsg(Você está silenciado. Aguarde terminar o tempo.);
+                addSystemMsg(`Você está silenciado. Aguarde terminar o tempo.`);
                 return;
             }
 
             let txt = chatInput.value.trim();
             if (!txt) return;
 
-            const myBubble = addMsg("msg-me", <b>${username}:</b> ${txt});
+            const myBubble = addMsg("msg-me", `<b>${username}:</b> ${txt}`);
 
             const ref = db.ref(GENERAL_ROOM_PATH).push({
                 user: username,
@@ -658,7 +666,7 @@
             // parou de digitar ao enviar
             setTypingState(false);
 
-            (async () => {
+            (async() => {
                 const mod = await geminiModerate(txt);
 
                 if (mod.status === "block") {
@@ -666,12 +674,12 @@
                     updateBadCounter();
 
                     myBubble.classList.add("msg-blocked");
-                    myBubble.innerHTML = <b>${username}:</b> [blocked by moderation];
+                    myBubble.innerHTML = `<b>${username}:</b> [blocked by moderation]`;
 
                     ref.remove();
 
                     if (badCount >= BAD_LIMIT && !isMuted()) {
-       const TEN_MIN = 10 * 60 * 1000;
+                        const TEN_MIN = 10 * 60 * 1000;
                         muteUntil = Date.now() + TEN_MIN;
                         applyMuteState();
                         addSystemMsg("Suspensão por 9 minutos");
@@ -683,81 +691,65 @@
                             Desativamos seu bate-papo no chat porque você pode ter usado linguagem que quebra as regras do Site
                         `;
                         alertPanel.style.display = "flex";
+
                         alertBtn.onclick = () => {
                             alertPanel.style.display = "none";
                         };
 
                         startMuteCountdown();
-                    } else {
-                        alertText.innerHTML = `
-                            Linguagem inadequada detectamos.<br>
-                            uso de palavras que pode viola.
-                        `;
-                        alertPanel.style.display = "flex";
-                        alertBtn.onclick = () => {
-                            alertPanel.style.display = "none";
-                        };
                     }
                 }
             })();
         };
 
-        // ENTER também envia
-        chatInput.addEventListener("keydown", e => {
+        // enviar com Enter
+        chatInput.addEventListener("keydown", (e) => {
             if (e.key === "Enter") {
                 e.preventDefault();
                 chatSend.click();
-            } else {
-                // qualquer tecla: marcar como digitando
-                if (!isMuted()) {
-                    if (!isCurrentlyTyping) {
-                        setTypingState(true);
-                    }
-                    if (typingTimeout) clearTimeout(typingTimeout);
-                    typingTimeout = setTimeout(() => {
-                        setTypingState(false);
-                    }, 2000);
-                }
             }
         });
 
-        // BOTÃO LIMPAR CHAT (sem alert do navegador)
+        // detectar quando está digitando
+        chatInput.addEventListener("input", () => {
+            if (!isCurrentlyTyping) {
+                setTypingState(true);
+            }
+            if (typingTimeout) clearTimeout(typingTimeout);
+            typingTimeout = setTimeout(() => {
+                setTypingState(false);
+            }, 1500);
+        });
 
+        // limpar o chat geral DIRETO, sem aviso e sem texto depois
         clearChatBtn.onclick = () => {
-         db.ref(GENERAL_ROOM_PATH).remove()
-        .then(() => {
-            chatBox.innerHTML = "";
-        })
-        .catch(err => {
-            console.error("Erro ao limpar chat:", err);
-            addSystemMsg("Erro ao limpar o chat.");
-        });
+            db.ref(GENERAL_ROOM_PATH).remove()
+                .then(() => {
+                    chatBox.innerHTML = "";
+                    // não mostra nenhuma mensagem
+                })
+                .catch(err => {
+                    console.error("Erro ao limpar chat:", err);
+                    addSystemMsg("Erro ao limpar o chat.");
+                });
         };
 
-        // EMOJIS
+        // EMOJI PICKER
         emojiBtn.onclick = () => {
-            emojiPicker.style.display =
-                (emojiPicker.style.display === "none" || emojiPicker.style.display === "")
-                    ? "flex"
-                    : "none";
+            if (emojiPicker.style.display === "flex") {
+                emojiPicker.style.display = "none";
+            } else {
+                emojiPicker.style.display = "flex";
+            }
         };
 
-        document.querySelectorAll(".emoji").forEach(em => {
-            em.onclick = () => {
-                if (isMuted()) {
-                    addSystemMsg("Você não pode usar emoji agora por seu silenciamento do chat.");
-                    return;
-                }
-                chatInput.value += em.textContent;
+        emojiPicker.addEventListener("click", (e) => {
+            if (e.target.classList.contains("emoji")) {
+                chatInput.value += e.target.textContent;
                 chatInput.focus();
-            };
+            }
         });
-
-        window.onload = () => {
-            usernameInput.value = "";
-        };
     </script>
-
 </body>
 
 </html>
