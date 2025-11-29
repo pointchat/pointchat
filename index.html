@@ -27,7 +27,6 @@
             flex-direction: column;
         }
         /* LOGIN */
-        
         #login-screen {
             position: fixed;
             inset: 0;
@@ -38,7 +37,6 @@
             z-index: 9999;
             padding: 20px;
         }
-        
         #login-box {
             width: 100%;
             max-width: 360px;
@@ -349,7 +347,6 @@
             <button id="chatSend" type="button">Enviar</button>
         </div>
     </div>
-
     <!-- EMOJIS -->
     <div id="emojiPicker">
         <span class="emoji">😀</span>
@@ -367,7 +364,6 @@
         <span class="emoji">🙌</span>
         <span class="emoji">💯</span>
     </div>
-
     <!-- ALERT PANEL -->
     <div id="alertPanel">
         <div>
@@ -377,14 +373,11 @@
             <button id="alertBtn">Entendi</button>
         </div>
     </div>
-
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-
     <script>
         const GEMINI_API_KEY = "AIzaSyDaKg9-7yJAc_TMDhPJb1p9G2qzMuaBZaY";
-
         const firebaseConfig = {
             apiKey: "AIzaSyAYMXW6QNVaHG0_xd09Zn0QuSrlro3Jd9k",
             authDomain: "api-c1c81-f8d1f.firebaseapp.com",
@@ -394,51 +387,40 @@
             messagingSenderId: "1050870116560",
             appId: "1:1050870116560:web:480695d6ae41d03575eed5"
         };
-
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
-
         // sala geral fixa
         const GENERAL_ROOM_PATH = "rooms/global/messages";
         const TYPING_PATH = "rooms/global/typing";
-
         let username = null;
         let userId = null; // id único do usuário
-
         let badCount = 0;
         const BAD_LIMIT = 5;
-
         let muteUntil = 0;
         let muteInterval = null;
-
         const loginScreen = document.getElementById("login-screen");
         const loginBtn = document.getElementById("loginBtn");
         const usernameInput = document.getElementById("username");
         const errorMessage = document.getElementById("error-message");
-
         const chatContainer = document.getElementById("chat-container");
         const chatBox = document.getElementById("chatBox");
         const chatInput = document.getElementById("chatInput");
         const chatSend = document.getElementById("chatSend");
         const emojiBtn = document.getElementById("emojiBtn");
         const emojiPicker = document.getElementById("emojiPicker");
-
         const alertPanel = document.getElementById("alertPanel");
         const alertBtn = document.getElementById("alertBtn");
         const alertText = document.getElementById("alertText");
-
         const badCounterLabel = document.getElementById("badCounter");
         const muteTimerLabel = document.getElementById("muteTimer");
         const clearChatBtn = document.getElementById("clearChatBtn");
         const typingIndicator = document.getElementById("typingIndicator");
-
         let typingTimeout = null;
         let isCurrentlyTyping = false;
 
         function updateBadCounter() {
             badCounterLabel.textContent = "";
         }
-
         function addSystemMsg(txt) {
             const div = document.createElement("div");
             div.className = "system";
@@ -446,7 +428,6 @@
             chatBox.appendChild(div);
             chatBox.scrollTop = chatBox.scrollHeight;
         }
-
         function addMsg(type, txt) {
             const div = document.createElement("div");
             div.className = type;
@@ -455,7 +436,6 @@
             chatBox.scrollTop = chatBox.scrollHeight;
             return div;
         }
-
         async function geminiModerate(text) {
             try {
                 const resp = await fetch(
@@ -472,7 +452,6 @@
                             }]
                         })
                     });
-
                 const data = await resp.json();
                 let out = "";
                 if (
@@ -486,7 +465,6 @@
                 ) {
                     out = data.candidates[0].content.parts[0].text.trim();
                 }
-
                 if (!out) return {
                     status: "allow"
                 };
@@ -496,11 +474,9 @@
                         status: "block"
                     };
                 }
-
                 return {
                     status: "allow"
                 };
-
             } catch (e) {
                 console.error("AI error:", e);
                 return {
@@ -508,11 +484,9 @@
                 };
             }
         }
-
         function isMuted() {
             return Date.now() < muteUntil;
         }
-
         function formatRemaining() {
             const diffMs = muteUntil - Date.now();
             if (diffMs <= 0) return "00:00";
@@ -521,15 +495,12 @@
             const sec = String(totalSec % 60).padStart(2, "0");
             return `${min}:${sec}`;
         }
-
         function startMuteCountdown() {
             if (muteInterval) {
                 clearInterval(muteInterval);
                 muteInterval = null;
             }
-
             muteTimerLabel.textContent = `Silenciado devido uso linguagem imprópria: ${formatRemaining()}`;
-
             muteInterval = setInterval(() => {
                 if (!isMuted()) {
                     clearInterval(muteInterval);
@@ -543,7 +514,6 @@
                 muteTimerLabel.textContent = ` Você foi silenciado pelo chat por ${formatRemaining()}`;
             }, 1000);
         }
-
         function applyMuteState() {
             if (isMuted()) {
                 chatInput.disabled = true;
@@ -553,7 +523,6 @@
                 chatSend.disabled = false;
             }
         }
-
         // marcar que este usuário está ou não está digitando
         function setTypingState(isTyping) {
             if (!userId) return;
@@ -564,12 +533,10 @@
                 ts: Date.now()
             });
         }
-
         // atualizar texto "alguém está digitando..."
         function updateTypingIndicatorFromSnapshot(snapshot) {
             const data = snapshot.val() || {};
             const typingUsers = [];
-
             Object.keys(data).forEach(id => {
                 const info = data[id];
                 if (!info) return;
@@ -578,7 +545,6 @@
                     typingUsers.push(info.username || "Alguém");
                 }
             });
-
             if (typingUsers.length === 0) {
                 typingIndicator.textContent = "";
             } else if (typingUsers.length === 1) {
@@ -589,101 +555,79 @@
                 typingIndicator.textContent = `${typingUsers[0]}, ${typingUsers[1]} outros estão digitando...`;
             }
         }
-
         // escutar typing dos outros
         function listenTyping() {
             db.ref(TYPING_PATH).on("value", snap => {
                 updateTypingIndicatorFromSnapshot(snap);
             });
         }
-
         // escutar mensagens do chat geral
         function listenMessages() {
             db.ref(GENERAL_ROOM_PATH).on("child_added", snap => {
                 const msg = snap.val();
                 if (!msg) return;
-
                 if (msg.user !== username) {
                     addMsg("msg-them", `<b>${msg.user}:</b> ${msg.text}`);
                 }
             });
         }
-
         // LOGIN + ENTRAR NO CHAT GERAL
         loginBtn.onclick = () => {
             username = usernameInput.value.trim();
-
             if (!username) {
                 errorMessage.style.display = "block";
                 return;
             }
-
             // cria um id simples pro usuário (só pra sessão)
             userId = "u_" + Math.random().toString(36).slice(2);
-
             errorMessage.style.display = "none";
             loginScreen.style.display = "none";
             chatContainer.style.display = "flex";
             document.querySelector(".desktop-header").style.display = "flex";
             document.querySelector(".mobile-header").style.display = "flex";
-
             chatInput.disabled = false;
             chatInput.value = "";
             chatInput.focus();
             chatBox.innerHTML = "";
-
             badCount = 0;
             muteUntil = 0;
             muteTimerLabel.textContent = "";
             updateBadCounter();
             applyMuteState();
-
             // escutar mensagens e typing
             listenMessages();
             listenTyping();
         };
-
         // ENVIAR MENSAGEM
         chatSend.onclick = async() => {
             if (isMuted()) {
                 addSystemMsg(`Você está silenciado. Aguarde terminar o tempo.`);
                 return;
             }
-
             let txt = chatInput.value.trim();
             if (!txt) return;
-
             const myBubble = addMsg("msg-me", `<b>${username}:</b> ${txt}`);
-
             const ref = db.ref(GENERAL_ROOM_PATH).push({
                 user: username,
                 text: txt,
                 time: Date.now()
             });
-
             chatInput.value = "";
-
             // parou de digitar ao enviar
             setTypingState(false);
-
             (async() => {
                 const mod = await geminiModerate(txt);
-
                 if (mod.status === "block") {
                     badCount++;
                     updateBadCounter();
-
                     myBubble.classList.add("msg-blocked");
                     myBubble.innerHTML = `<b>${username}:</b> [blocked by moderation]`;
-
                     ref.remove();
-
                     if (badCount >= BAD_LIMIT && !isMuted()) {
                         const TEN_MIN = 10 * 60 * 1000;
                         muteUntil = Date.now() + TEN_MIN;
                         applyMuteState();
                         addSystemMsg("Suspensão por 9 minutos");
-
                         alertText.innerHTML = `
                             !<br>
                             CHAT SUSPENSO<br><br>
@@ -691,7 +635,6 @@
                             Desativamos seu bate-papo no chat porque você pode ter usado linguagem que quebra as regras do Site
                         `;
                         alertPanel.style.display = "flex";
-
                         alertBtn.onclick = () => {
                             alertPanel.style.display = "none";
                         };
@@ -701,7 +644,6 @@
                 }
             })();
         };
-
         // enviar com Enter
         chatInput.addEventListener("keydown", (e) => {
             if (e.key === "Enter") {
@@ -709,7 +651,6 @@
                 chatSend.click();
             }
         });
-
         // detectar quando está digitando
         chatInput.addEventListener("input", () => {
             if (!isCurrentlyTyping) {
@@ -720,7 +661,6 @@
                 setTypingState(false);
             }, 1500);
         });
-
         // limpar o chat geral DIRETO, sem aviso e sem texto depois
         clearChatBtn.onclick = () => {
             db.ref(GENERAL_ROOM_PATH).remove()
@@ -733,7 +673,6 @@
                     addSystemMsg("Erro ao limpar o chat.");
                 });
         };
-
         // EMOJI PICKER
         emojiBtn.onclick = () => {
             if (emojiPicker.style.display === "flex") {
@@ -742,7 +681,6 @@
                 emojiPicker.style.display = "flex";
             }
         };
-
         emojiPicker.addEventListener("click", (e) => {
             if (e.target.classList.contains("emoji")) {
                 chatInput.value += e.target.textContent;
@@ -751,5 +689,4 @@
         });
     </script>
 </body>
-
 </html>
